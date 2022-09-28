@@ -2,7 +2,6 @@ plugins {
 	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
 	id 'java'
-	id 'com.google.cloud.tools.jib' version '3.1.4'
 }
 
 group = 'com.daeuk'
@@ -29,15 +28,4 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-jib {
-	to {
-		image = project.findProperty("docker.repository") + "/" + project.findProperty("docker.image.name")
-		tags = [project.findProperty("docker.image.tag")]
-		auth {
-			username = project.findProperty("docker.repository.username")
-			password = project.findProperty("docker.repository.password")
-		}
-	}
 }
